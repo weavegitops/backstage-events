@@ -9,7 +9,7 @@ permissions:
   packages: write # needed for ghcr.io access
 
 env:
-  OCI_REPO: "oci://ghcr.io/weavegitops/manifests/${{ github.event.repository.name }}"
+  OCI_REPO: "oci://ghcr.io/weavegitops/manifests/backstage"
 
 jobs:
   oci-bundler:
