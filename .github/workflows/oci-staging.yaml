@@ -9,6 +9,7 @@ permissions:
   packages: write # needed for ghcr.io access
 
 env:
+  OCI_NAME: backstage
   OCI_REPO: "oci://ghcr.io/weavegitops/manifests/backstage"
 
 jobs:
@@ -36,3 +37,10 @@ jobs:
       - name: Deploy manifests to staging
         run: |
           flux tag artifact $OCI_REPO:$(git rev-parse --short HEAD) --tag staging
+      - name: Output OCI YAML
+        run: |
+          flux create source oci $OCI_NAME \
+          --url=$OCI_REPO \
+          --tag=staging \
+          --interval=10m \
+          --export
